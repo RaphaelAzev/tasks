@@ -18,8 +18,7 @@ def index(request):
 @api_view(["GET"])
 def getall(request):
     tasks = Task.objects.all()
-    json = serializers.serialize("json", tasks)
-    return HttpResponse(json, content_type="application/json")
+    return JsonResponse(TaskSerializer(tasks, many=True).data, safe=False)
 
 
 @api_view(["POST"])
